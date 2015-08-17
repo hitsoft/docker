@@ -13,13 +13,6 @@ if [ "$1" = 'mongod' ]; then
 		set -- $numa "$@"
 	fi
 
-    thp_path=/sys/kernel/mm/transparent_hugepage
-
-    echo 'never' > ${thp_path}/enabled
-    echo 'never' > ${thp_path}/defrag
-
-    unset thp_path
-
 	exec gosu mongodb --config /etc/mongod.conf "$@"
 fi
 
