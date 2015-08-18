@@ -42,7 +42,7 @@ RUN set -x \
 RUN mkdir -p /data/db && chown -R mongodb:mongodb /data/db
 VOLUME /data/db
 
-COPY entrypoint.sh /entrypoint.sh
+COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 27017
