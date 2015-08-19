@@ -44,7 +44,7 @@ RUN mkdir -p /data/log && chown -R mongodb:mongodb /data/log
 RUN mkdir -p /data/backup && chown -R mongodb:mongodb /data/backup
 VOLUME /data
 
-COPY docker-entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 COPY backup.sh /backup.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
