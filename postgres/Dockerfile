@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM debian:jessie
+FROM hitsoft/base
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r postgres && useradd -r -g postgres postgres
@@ -39,8 +39,8 @@ RUN apt-get update \
 RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
 ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
-ENV PGDATA /data
-VOLUME /data
+ENV PGDATA /data/db
+VOLUME /data/db
 
 COPY entrypoint.sh /entrypoint.sh
 
