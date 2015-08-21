@@ -16,4 +16,8 @@ RUN \
 # Pregenerate password database to prevent warning messages on container startup
 RUN /usr/sbin/smbd && sleep 10 && smbcontrol smbd shutdown
 
-ENTRYPOINT ["/usr/sbin/smbd", "-FSD", "-d1"]
+COPY docker-entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["smbd", "-FSD", "-d1"]
