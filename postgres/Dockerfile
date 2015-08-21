@@ -40,7 +40,7 @@ RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
 ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
 ENV PGDATA /data/db
-VOLUME /data/db
+VOLUME /data
 
 COPY entrypoint.sh /entrypoint.sh
 
