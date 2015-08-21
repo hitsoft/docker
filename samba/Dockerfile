@@ -4,7 +4,7 @@ FROM hitsoft/base
 MAINTAINER Konstantin Borisov <smeagol74@gmail.com>
 
 VOLUME /data
-EXPOSE 139 445
+EXPOSE 137 138 139 445
 
 ENV DEBIAN_FRONTEND noninteractive
 
