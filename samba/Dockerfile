@@ -18,6 +18,9 @@ RUN /usr/sbin/smbd && sleep 10 && smbcontrol smbd shutdown
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
+VOLUME /etc/samba
+VOLUME /data
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["smbd", "-FSD", "-d1"]
