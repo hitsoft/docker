@@ -2,6 +2,8 @@ FROM debian:jessie
 
 MAINTAINER Konstantin Borisov <smeagol74@gmail.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 # grab gosu for easy step-down from root
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
