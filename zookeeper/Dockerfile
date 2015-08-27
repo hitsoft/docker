@@ -18,8 +18,10 @@ RUN cd /opt && \
     rm -rf apache-maven-3.3.3 && \
     rm apache-maven-3.3.3-bin.tar.gz && \
     rm -rf zkui.src && \
-    rm -rf /root/.m2
-COPY config.cfg /opt/zkui/config.cfg
+    rm -rf /root/.m2 && \
+    mkdir -p /etc/zkui && \
+    ln -s /etc/zkui/config.cfg /opt/zkui/config.cfg
+COPY config.cfg /etc/zkui/config.cfg
 
 #RUN curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > /usr/bin/lein && \
 #   chmod 755 /usr/bin/lein && \
@@ -28,7 +30,7 @@ COPY config.cfg /opt/zkui/config.cfg
 #    cd zk-web && \
 #    lein deps
 
-VOLUME /data
+VOLUME [ "/data", "/etc/zkui/config.cfg" ]
 
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY zoo.cfg /etc/zookeeper/conf/zoo.cfg
