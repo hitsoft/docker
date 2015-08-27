@@ -3,7 +3,13 @@
 function build() {
     NAME=$1
     pushd ${NAME}
-        echo "\n\n\nBuilding ${NAME}\n\n\n"
+        echo ""
+        echo ""
+        echo "###"
+        echo "### Building hitsoft/${NAME}"
+        echo "###"
+        echo ""
+        echo ""
         docker build -t hitsoft/${NAME} .
     popd
 }
@@ -24,4 +30,10 @@ pushd ${DIR}
     build samba
     build wordpress
     build zookeeper
+
+echo ""
+echo ""
+echo "###"
+echo "### Well done!"
+echo "###"
 popd
