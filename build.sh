@@ -30,6 +30,7 @@ pushd ${DIR}
     build samba
     build wordpress
     build zookeeper
+    build tomcat
 
 echo ""
 echo ""

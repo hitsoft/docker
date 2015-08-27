@@ -6,9 +6,6 @@ RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get install --assume-yes --no-install-recommends \
         zookeeper \
-        wget \
-        curl \
-        git \
     && rm -rf /var/lib/apt/lists/*
 RUN cd /opt \
     && wget http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz \
