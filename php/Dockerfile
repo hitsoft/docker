@@ -1,10 +1,28 @@
 FROM hitsoft/base
 
 # persistent / runtime deps
-RUN apt-get update && apt-get install -y ca-certificates curl libpcre3 librecode0 libsqlite3-0 libxml2 --no-install-recommends && rm -r /var/lib/apt/lists/*
+RUN apt-get update \
+	&& apt-get install --assume-yes --no-install-recommends \
+ 		ca-certificates \
+ 		curl \
+ 		libpcre3 \
+ 		librecode0 \
+ 		libsqlite3-0 \
+ 		libxml2 \
+ 	&& rm -r /var/lib/apt/lists/*
 
 # phpize deps
-RUN apt-get update && apt-get install -y autoconf file g++ gcc libc-dev make pkg-config re2c --no-install-recommends && rm -r /var/lib/apt/lists/*
+RUN apt-get update \
+	&& apt-get install --assume-yes --no-install-recommends \
+		autoconf \
+		file \
+		g++ \
+		gcc \
+		libc-dev \
+		make \
+		pkg-config \
+		re2c \
+	&& rm -r /var/lib/apt/lists/*
 
 ENV PHP_INI_DIR /usr/local/etc/php
 RUN mkdir -p $PHP_INI_DIR/conf.d
@@ -34,7 +52,10 @@ RUN buildDeps=" \
 		xz-utils \
 	" \
 	&& set -x \
-	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+	&& apt-get update \
+	&& apt-get install --assume-yes --no-install-recommends \
+		$buildDeps \
+	&& rm -rf /var/lib/apt/lists/* \
 	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.xz/from/this/mirror" -o php.tar.xz \
 	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.xz.asc/from/this/mirror" -o php.tar.xz.asc \
 	&& gpg --verify php.tar.xz.asc \

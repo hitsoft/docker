@@ -7,7 +7,8 @@ RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		ca-certificates curl \
+		ca-certificates \
+		curl \
 		numactl \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -21,7 +22,7 @@ RUN echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/$MONGO_MAJOR
 
 RUN set -x \
 	&& apt-get update \
-	&& apt-get install -y \
+	&& apt-get install  --assume-yes --no-install-recommends \
 		mongodb-org=$MONGO_VERSION \
 		mongodb-org-server=$MONGO_VERSION \
 		mongodb-org-shell=$MONGO_VERSION \
