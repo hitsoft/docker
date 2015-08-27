@@ -27,7 +27,7 @@ RUN cd /opt \
     && ln -s /etc/zkui/config.cfg /opt/zkui/config.cfg
 COPY config.cfg /etc/zkui/config.cfg
 
-VOLUME [ "/data", "/etc/zkui/config.cfg" ]
+VOLUME [ "/data" ]
 
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY zoo.cfg /etc/zookeeper/conf/zoo.cfg
