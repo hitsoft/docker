@@ -6,8 +6,6 @@ RUN apt-get update \
     && apt-get install --assume-yes --no-install-recommends \
         nodejs \
         npm \
-        golang \
-		make \
     && rm -rf /var/lib/apt/lists/* \
     && cd /usr/bin \
     && ln -s nodejs node \
@@ -39,20 +37,6 @@ RUN cd /opt \
 # install etcd-dump
 RUN npm install -g etcd-dump \
     && npm install -g jsonlint
-
-# install etcd-fs
-RUN cd /opt \
-    && git clone https://github.com/xetorthio/etcd-fs.git etcd-fs.src \
-    && cd etcd-fs.src \
-    && export GOPATH=$(pwd) \
-    && go get github.com/franela/goblin \
-    && go get github.com/coreos/go-etcd/etcd \
-    && go get github.com/hanwen/go-fuse/fuse \
-    && make build \
-    && mkdir -p /opt/etcd-fs \
-    && mv etcdfs /opt/etcd-fs \
-    && ln -s /opt/etcd-fs/etcdfs /usr/bin/ \
-    && rm -rf /opt/etcd-fs.src
 
 VOLUME /data
 
