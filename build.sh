@@ -31,6 +31,7 @@ pushd ${DIR}
     build wordpress
     build zookeeper
     build tomcat
+    build etcd
 
 echo ""
 echo ""

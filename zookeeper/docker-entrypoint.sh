@@ -2,9 +2,6 @@
 set -e
 
 if [ "$1" = 'zkServer' ]; then
-#	cd /opt/zk-web
-#	lein run &
-
 	cd /opt/zkui
     java -jar zkui-2.0-SNAPSHOT-jar-with-dependencies.jar &
 
