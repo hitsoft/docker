@@ -54,6 +54,8 @@ RUN cd /opt \
     && ln -s /opt/etcd-fs/etcdfs /usr/bin/ \
     && rm -rf /opt/etcd-fs.src
 
+VOLUME /data
+
 COPY docker-entrypoint.sh /entrypoint.sh
 
 COPY etcd-pdump.sh /usr/bin/etcd-pdump
@@ -62,4 +64,4 @@ ENTRYPOINT [ "/entrypoint.sh" ]
 
 EXPOSE 4001 8000
 
-CMD ["etcd", "--cors", "*", "--listen-client-urls", "http://0.0.0.0:4001", "--advertise-client-urls", "http://0.0.0.0:4001"]
+CMD ["etcd", "--cors", "*", "--listen-client-urls", "http://0.0.0.0:4001", "--advertise-client-urls", "http://0.0.0.0:4001", "--data-dir", "/data/db"]

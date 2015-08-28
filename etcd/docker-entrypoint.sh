@@ -4,7 +4,14 @@ set -e
 if [ "$1" = 'etcd' ]; then
     #CMD ["nodejs", "server.js"]
 	cd /opt/etcd-browser
-	nodejs server.js &
-fi
+	exec nodejs server.js &
 
-exec "$@"
+	mkdir -p /data/db
+	exec "$@" &
+
+	mkdir -p /data/etcd
+	exec etcdfs /data/etcd http://localhost:4001 &
+
+else
+	exec "$@"
+fi
