@@ -3,13 +3,13 @@
 function build() {
     NAME=$1
     pushd ${NAME}
-        echo ""
-        echo ""
-        echo "###"
-        echo "### Building hitsoft/${NAME}"
-        echo "###"
-        echo ""
-        echo ""
+        echo "" >&2
+        echo "" >&2
+        echo "###" >&2
+        echo "### Building hitsoft/${NAME}" >&2
+        echo "###" >&2
+        echo "" >&2
+        echo "" >&2
         docker build -t hitsoft/${NAME} .
     popd
 }
@@ -33,9 +33,9 @@ pushd ${DIR}
     build tomcat
     build etcd
 
-echo ""
-echo ""
-echo "###"
-echo "### Well done!"
-echo "###"
+echo "" >&2
+echo "" >&2
+echo "###" >&2
+echo "### Well done!" >&2
+echo "###" >&2
 popd
