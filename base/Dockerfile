@@ -25,3 +25,7 @@ RUN wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/downloa
 # make the "en_US.UTF-8" locale so postgres will be utf-8 enabled by default
 RUN localedef -i ru_RU -c -f UTF-8 -A /usr/share/locale/locale.alias ru_RU.UTF-8
 ENV LANG ru_RU.utf8
+
+# setup proper timezone
+RUN echo "Europe/Moscow" > /etc/timezone \
+	&& dpkg-reconfigure -f noninteractive tzdata
