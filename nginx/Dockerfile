@@ -7,9 +7,11 @@ ENV NGINX_VERSION 1.9.4-1~jessie
 
 RUN apt-get update \
     && apt-get install  --assume-yes --no-install-recommends \
-        ca-certificates \
         nginx=${NGINX_VERSION} \
+        build-essential \
     && rm -rf /var/lib/apt/lists/*
+    && cd /opt \
+    && wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
