@@ -74,8 +74,7 @@ process_wait() {
 postmap_databases() {
     set +e
     pushd /etc/postfix
-    postmap ./*_maps
-    postmap ./sasl/*
+    postmap ./**/*_map
     popd
 }
 
