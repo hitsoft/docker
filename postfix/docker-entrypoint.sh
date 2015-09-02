@@ -74,8 +74,12 @@ process_wait() {
 postmap_databases() {
     set +e
     pushd /etc/postfix
-    postmap ./*_map
-    postmap ./**/*_map
+    if ls ./*_map 1> /dev/null 2>&1; then
+        postmap ./*_map
+    fi
+    if ls ./**/*_map 1> /dev/null 2>&1; then
+        postmap ./**/*_map
+    fi
     popd
 }
 
