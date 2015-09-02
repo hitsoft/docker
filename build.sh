@@ -32,6 +32,7 @@ pushd ${DIR}
     build zookeeper
     build tomcat
     build etcd
+    build postfix
 
 echo "" >&2
 echo "" >&2
