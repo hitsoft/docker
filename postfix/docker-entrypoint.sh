@@ -71,7 +71,18 @@ process_wait() {
     done
 }
 
+postmap_databases() {
+    set +e
+    pushd /etc/postfix
+    postmap ./*_maps
+    postmap ./sasl/*
+    popd
+}
+
 if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then
+
+    postmap_databases
+
     syslog_start
     postfix_check
     postfix_start "$@"
