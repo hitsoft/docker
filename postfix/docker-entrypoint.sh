@@ -13,6 +13,16 @@ postfix_check() {
     [ -d /var/spool/postfix/ ] || mkdir -p /var/spool/postfix/
     [ 'root:root' = `stat -c %U:%G /var/spool/postfix/` ] || chown root:root /var/spool/postfix/
 
+    local SPOOL_ETC=/var/spool/postfix/etc
+
+    rm -rf ${SPOOL_ETC}
+    mkdir -p ${SPOOL_ETC}
+
+    local FILES="localtime services resolv.conf hosts nsswitch.conf nss_mdns.config"
+    for file in ${FILES}; do
+        cp /etc/${file} ${SPOOL_ETC}/
+    done
+
     /usr/sbin/postfix check
 }
 
