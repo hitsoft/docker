@@ -11,7 +11,7 @@ RUN apt-get update \
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
-VOLUME ["/var/lib/postfix/", "/var/spool/postfix/"]
+VOLUME [ "/var/spool/postfix/", "/etc/postfix/" ]
 
 EXPOSE 25 587
 
