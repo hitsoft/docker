@@ -22,12 +22,18 @@ fi
 /sbin/setuser zabbix sed 's/{{DB_USER}}/'"${DB_USER}"'/' -i /etc/zabbix/zabbix_server.conf
 /sbin/setuser zabbix sed 's/{{DB_PASS}}/'"${DB_PASS}"'/' -i /etc/zabbix/zabbix_server.conf
 
-count_tables=$(echo "SHOW TABLES; SELECT FOUND_ROWS();" | mysql -h$DB_HOST -u$DB_USER -p$DB_PASS $DB_NAME | grep "[0-9]")
+MYSQL=/usr/bin/mysql\ "-h${DB_HOST}"\ "-u${DB_USER}"\ "-p${DB_PASS}"\ "${DB_NAME}"
 
-if [ "${count_tables}" -eq "0" ]; then
-  /usr/bin/mysql -h$DB_HOST -u$DB_USER -p$DB_PASS $DB_NAME < /usr/share/zabbix-server-mysql/schema.sql
-  /usr/bin/mysql -h$DB_HOST -u$DB_USER -p$DB_PASS $DB_NAME < /usr/share/zabbix-server-mysql/images.sql
-  /usr/bin/mysql -h$DB_HOST -u$DB_USER -p$DB_PASS $DB_NAME < /usr/share/zabbix-server-mysql/data.sql
+echo "mysql: ${MYSQL}"
+
+count_tables=$(echo "SHOW TABLES; SELECT FOUND_ROWS();" | ${MYSQL} | grep "[0-9]")
+
+echo "tables count: ${count_tables}"
+
+if [ ${count_tables} -eq 0 ]; then
+  ${MYSQL} < /usr/share/zabbix-server-mysql/schema.sql
+  ${MYSQL} < /usr/share/zabbix-server-mysql/images.sql
+  ${MYSQL} < /usr/share/zabbix-server-mysql/data.sql
 fi
 
 exec /sbin/setuser zabbix /usr/sbin/zabbix_server 2>&1
