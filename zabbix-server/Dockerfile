@@ -7,6 +7,7 @@ RUN wget http://repo.zabbix.com/zabbix/2.4/debian/pool/main/z/zabbix-release/zab
      && apt-get install --assume-yes --no-install-recommends \
           zabbix-server-mysql \
           zabbix-frontend-php \
+          zabbix-get \
  	 && apt-get clean \
 	 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
