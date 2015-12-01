@@ -54,14 +54,15 @@ pushd ${DIR}
     build java
     build php
 # Final services
+    build activemq
+    build etcd
     build mariadb
     build mongo
     build nginx
-    build samba
-    build wordpress
-    build tomcat
-    build etcd
     build postfix
+    build samba
+    build tomcat
+    build wordpress
     build zabbix-server
 # Not used yet
 #    build postgres
