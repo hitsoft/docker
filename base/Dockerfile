@@ -34,6 +34,8 @@ RUN dpkg-divert --local --rename --add /usr/bin/ischroot \
 COPY my_init.py /sbin/my_init
 COPY setuser.py /sbin/setuser
 
+RUN update-ca-certificates
+
 # grab gosu for easy step-down from root
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
 RUN wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/1.2/gosu-$(dpkg --print-architecture)" \
