@@ -59,14 +59,8 @@ pushd ${DIR}
     build mariadb
     build mongo
     build nginx
-#    build postfix
-#    build samba
     build tomcat
-#    build wordpress
     build zabbix-server
-# Not used yet
-#    build postgres
-#    build zookeeper
 
 echo "" >&2
 echo "" >&2
