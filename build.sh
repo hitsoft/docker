@@ -59,10 +59,10 @@ pushd ${DIR}
     build mariadb
     build mongo
     build nginx
-    build postfix
-    build samba
+#    build postfix
+#    build samba
     build tomcat
-    build wordpress
+#    build wordpress
     build zabbix-server
 # Not used yet
 #    build postgres
