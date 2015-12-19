@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+SCRIPT=$(readlink -f $0)
+DIR=$(dirname $SCRIPT)
+LOG=${DIR}/build.log
+
 function imageByTag() {
     IMAGE=$1
     TAG=$2
@@ -29,24 +33,33 @@ function build() {
         echo "" >&2
         echo "###" >&2
         echo "### Building ${IMAGE}" >&2
+        echo "### Building ${IMAGE}" >> ${LOG}
         echo "###" >&2
         echo "" >&2
         echo "" >&2
         LAST_ID=$(imageByTag ${IMAGE} latest)
         docker build -t ${IMAGE} .
-        NEW_ID=$(imageByTag ${IMAGE} latest)
-        if [[ "_${NEW_ID}_" == "_${LAST_ID}_" ]]; then
-            echo "!!! Nothing changed since last build" >&2
+        if [[ $? -ne 0 ]]; then
+            echo "!!! Build FAILED with error code $?" >> ${LOG}
         else
-            TAG=$(( $(maxVersion ${IMAGE}) + 1 ))
-            docker tag ${NEW_ID} ${IMAGE}:${TAG}
-            echo "!!! New image ${IMAGE}:${TAG} built" >&2
+            NEW_ID=$(imageByTag ${IMAGE} latest)
+            if [[ "_${NEW_ID}_" == "_${LAST_ID}_" ]]; then
+                echo "!!! Nothing changed since last build" >&2
+                echo "!!! Nothing changed since last build" >> ${LOG}
+            else
+                TAG=$(( $(maxVersion ${IMAGE}) + 1 ))
+                docker tag ${NEW_ID} ${IMAGE}:${TAG}
+                echo "!!! New image ${IMAGE}:${TAG} built" >&2
+                echo "!!! New image ${IMAGE}:${TAG} built" >> ${LOG}
+            fi
         fi
+        echo "" >> ${LOG}
     popd
 }
 
-SCRIPT=$(readlink -f $0)
-DIR=$(dirname $SCRIPT)
+echo "### Building Docker Images $(date)
+
+" > ${LOG}
 
 pushd ${DIR}
 # Base and intermediate
@@ -70,7 +83,9 @@ pushd ${DIR}
 
 echo "" >&2
 echo "" >&2
+echo "" >> ${LOG}
 echo "###" >&2
 echo "### Well done!" >&2
+echo "### Well done!" >> ${LOG}
 echo "###" >&2
 popd
