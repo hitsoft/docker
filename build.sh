@@ -89,3 +89,5 @@ echo "### Well done!" >&2
 echo "### Well done!" >> ${LOG}
 echo "###" >&2
 popd
+
+cat ${LOG}
