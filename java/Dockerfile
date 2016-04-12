@@ -14,7 +14,7 @@ ENV JAVA_DEBIAN_VERSION 8u72-b15-1~bpo8+1
 
 # see https://bugs.debian.org/775775
 # and https://github.com/docker-library/java/issues/19#issuecomment-70546872
-ENV CA_CERTIFICATES_JAVA_VERSION 20141019+deb8u1
+ENV CA_CERTIFICATES_JAVA_VERSION 20140324
 
 RUN set -x \
 	&& apt-get update \
